@@ -19,7 +19,7 @@ define :apache_site, :enable => true, :number => "000" do
     execute "a2dissite #{params[:name]}" do
       command "/usr/sbin/a2dissite #{params[:name]}"
       notifies :restart, resources(:service => "apache2")
-      only_if do File.symlink?("#{node[:apache][:dir]}/sites-available/#{params[:name]}") || File.symlink?("#{node[:apache][:dir]}/sites-available/#{params[:number]}-#{params[:name]}") end
+      only_if do File.symlink?("#{node[:apache][:dir]}/sites-enabled/#{params[:name]}") || File.symlink?("#{node[:apache][:dir]}/sites-enabled/#{params[:number]}-#{params[:name]}") end
     end
   end
 end
